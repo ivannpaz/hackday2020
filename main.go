@@ -15,7 +15,7 @@ func main() {
 
 	app.Use(cors.New())
 
-	app.Static("/", "./myapp/build")
+	app.Static("/", "./web/build")
 
 	app.Listen(":9000")
 }
