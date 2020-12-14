@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Tree from 'react-d3-tree';
+import './index.css';
 
 const myTreeData = [
   {
