@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
 func main() {
@@ -12,11 +13,9 @@ func main() {
 		ServerHeader:  "Fiber",
 	})
 
-	app.Static("/", "./web/public")
+	app.Use(cors.New())
 
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("OK REALLY?")
-	})
+	app.Static("/", "./myapp/build")
 
 	app.Listen(":9000")
 }
