@@ -1,67 +1,46 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import Tree from 'react-d3-tree';
 
-class Square extends React.Component {
-    render() {
-      return (
-        <button className="square">
-          {/* TODO */}
-        </button>
-      );
-    }
+const myTreeData = [
+  {
+    name: 'Top Level',
+    attributes: {
+      keyA: 'val A',
+      keyB: 'val B',
+      keyC: 'val C',
+    },
+    children: [
+      {
+        name: 'Level 2: A',
+        attributes: {
+          keyA: 'val A',
+          keyB: 'val B',
+          keyC: 'val C',
+        },
+      },
+      {
+        name: 'Level 2: B',
+      },
+    ],
+  },
+];
+
+class MyComponent extends React.Component {
+  render() {
+    return (
+      <div id="treeWrapper" style={{width: '100%', height: '100%'}}>
+
+        <Tree data={myTreeData} />
+
+      </div>
+    );
   }
+}
 
-  class Board extends React.Component {
-    renderSquare(i) {
-      return <Square />;
-    }
+// ========================================
 
-    render() {
-      const status = 'Next player: X';
-
-      return (
-        <div>
-          <div className="status">{status}</div>
-          <div className="board-row">
-            {this.renderSquare(0)}
-            {this.renderSquare(1)}
-            {this.renderSquare(2)}
-          </div>
-          <div className="board-row">
-            {this.renderSquare(3)}
-            {this.renderSquare(4)}
-            {this.renderSquare(5)}
-          </div>
-          <div className="board-row">
-            {this.renderSquare(6)}
-            {this.renderSquare(7)}
-            {this.renderSquare(8)}
-          </div>
-        </div>
-      );
-    }
-  }
-
-  class Game extends React.Component {
-    render() {
-      return (
-        <div className="game">
-          <div className="game-board">
-            <Board />
-          </div>
-          <div className="game-info">
-            <div>{/* status */}</div>
-            <ol>{/* TODO */}</ol>
-          </div>
-        </div>
-      );
-    }
-  }
-
-  // ========================================
-
-  ReactDOM.render(
-    <Game />,
-    document.getElementById('root')
-  );
+ReactDOM.render(
+  <MyComponent />,
+  document.getElementById('root')
+);
