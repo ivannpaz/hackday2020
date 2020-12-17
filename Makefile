@@ -1,16 +1,16 @@
-.PHONY: build
+.PHONY: server ui run clean
 
 export GO111MODULE=on
 export CGO_ENABLED=0
 
 
-build:
+server:
 	go build -o server
 
 ui:
 	cd web && npm run build
 
-run:
+runserver:
 	go run main.go
 
 clean:

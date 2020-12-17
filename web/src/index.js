@@ -1,47 +1,40 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Tree from 'react-d3-tree';
-import './index.css';
+// import React from 'react';
+// import ReactDOM from 'react-dom';
+// import './index.css';
+// import CenteredTree from './CenteredTree';
 
-const myTreeData = [
-  {
-    name: 'Top Level',
-    attributes: {
-      keyA: 'val A',
-      keyB: 'val B',
-      keyC: 'val C',
-    },
-    children: [
-      {
-        name: 'Level 2: A',
-        attributes: {
-          keyA: 'val A',
-          keyB: 'val B',
-          keyC: 'val C',
-        },
-      },
-      {
-        name: 'Level 2: B',
-      },
-    ],
-  },
-];
+// class MyComponent extends React.Component {
+//   render() {
+//     return (
+//       <div id="treeWrapper" style={{width: '100%', height: '100%'}}>
 
-class MyComponent extends React.Component {
-  render() {
-    return (
-      <div id="treeWrapper" style={{width: '100%', height: '100%'}}>
+//         <CenteredTree />
 
-        <Tree data={myTreeData} />
+//       </div>
+//     );
+//   }
+// }
 
-      </div>
-    );
-  }
-}
+import Tree from 'react-tree-graph';
+
+let data = {
+	name: 'Parent',
+	children: [{
+		name: 'Child One'
+	}, {
+		name: 'Child Two'
+	}]
+};
+
+<Tree
+	data={data}
+	height={400}
+  width={400}
+  />;
 
 // ========================================
 
 ReactDOM.render(
-  <MyComponent />,
+  <Tree />,
   document.getElementById('root')
 );
