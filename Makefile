@@ -15,3 +15,6 @@ runserver:
 
 clean:
 	rm am-route-test
+
+build:
+	#
