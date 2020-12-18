@@ -52,6 +52,7 @@ const data = {
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.setState({"maria": "lives here"})
   }
 
   render() {

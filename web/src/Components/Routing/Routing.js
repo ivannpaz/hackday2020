@@ -111,6 +111,7 @@ function ParentNode({ node }) {
 const defaultMargin = { top: 10, left: 80, right: 80, bottom: 10 };
 
 function Routing({ rawTree, width, height, margin = defaultMargin }) {
+    // eslint-disable-next-line
   const data = useMemo(() => hierarchy(rawTree), []);
   const yMax = height - margin.top - margin.bottom;
   const xMax = width - margin.left - margin.right;
