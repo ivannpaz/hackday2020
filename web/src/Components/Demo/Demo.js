@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import { Group } from '@visx/group';
 import { Tree, hierarchy } from '@visx/hierarchy';
-import { HierarchyPointNode } from '@visx/hierarchy/lib/types';
 import { LinkHorizontal } from '@visx/shape';
 import { LinearGradient } from '@visx/gradient';
 
