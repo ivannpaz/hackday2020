@@ -1,17 +1,17 @@
-import React, { useMemo } from 'react';
-import { Group } from '@visx/group';
-import { Tree, hierarchy } from '@visx/hierarchy';
-import { LinkHorizontal } from '@visx/shape';
-import { LinearGradient } from '@visx/gradient';
+import React, { useMemo } from "react";
+import { Group } from "@visx/group";
+import { Tree, hierarchy } from "@visx/hierarchy";
+import { LinkHorizontal } from "@visx/shape";
+import { LinearGradient } from "@visx/gradient";
 
-const peach = '#fd9b93';
-const pink = '#fe6e9e';
-const blue = '#03c0dc';
-const green = '#26deb0';
-const plum = '#71248e';
-const lightpurple = '#374469';
-const white = '#ffffff';
-export const background = '#272b4d';
+const peach = "#fd9b93";
+const pink = "#fe6e9e";
+const blue = "#03c0dc";
+const green = "#26deb0";
+const plum = "#71248e";
+const lightpurple = "#374469";
+const white = "#ffffff";
+export const background = "#272b4d";
 
 /** Handles rendering Root, Parent, and other Nodes. */
 function Node({ node }) {
@@ -48,7 +48,7 @@ function Node({ node }) {
         fontFamily="Arial"
         textAnchor="middle"
         fill={green}
-        style={{ pointerEvents: 'none' }}
+        style={{ pointerEvents: "none" }}
       >
         {node.data.name}
       </text>
@@ -65,7 +65,7 @@ function RootNode({ node }) {
         fontSize={9}
         fontFamily="Arial"
         textAnchor="middle"
-        style={{ pointerEvents: 'none' }}
+        style={{ pointerEvents: "none" }}
         fill={plum}
       >
         {node.data.name}
@@ -99,7 +99,7 @@ function ParentNode({ node }) {
         fontSize={9}
         fontFamily="Arial"
         textAnchor="middle"
-        style={{ pointerEvents: 'none' }}
+        style={{ pointerEvents: "none" }}
         fill={white}
       >
         {node.data.name}
@@ -120,7 +120,7 @@ function Routing({ rawTree, width, height, margin = defaultMargin }) {
       <LinearGradient id="lg" from={peach} to={pink} />
       <rect width={width} height={height} rx={14} fill={background} />
       <Tree root={data} size={[yMax, xMax]}>
-        {tree => (
+        {(tree) => (
           <Group top={margin.top} left={margin.left}>
             {tree.links().map((link, i) => (
               <LinkHorizontal
@@ -141,4 +141,4 @@ function Routing({ rawTree, width, height, margin = defaultMargin }) {
   );
 }
 
-export default Routing
+export default Routing;

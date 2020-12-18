@@ -1,39 +1,39 @@
-import "./App.css"
+import "./App.css";
 
-import React from 'react';
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
-import { Paper } from '@material-ui/core';
+import React from "react";
+import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
+import { Paper } from "@material-ui/core";
 
 // import Routing from '../Routing/Routing'
-import Routing from '../Routing/Routing'
+import Routing from "../Routing/Routing";
 
 const data = {
-  name: 'T',
+  name: "T",
   children: [
     {
-      name: 'A',
+      name: "A",
       children: [
-        { name: 'A1' },
-        { name: 'A2' },
-        { name: 'A3' },
+        { name: "A1" },
+        { name: "A2" },
+        { name: "A3" },
         {
-          name: 'C',
+          name: "C",
           children: [
             {
-              name: 'C1',
+              name: "C1",
             },
             {
-              name: 'D',
+              name: "D",
               children: [
                 {
-                  name: 'D1',
+                  name: "D1",
                 },
                 {
-                  name: 'D2',
+                  name: "D2",
                 },
                 {
-                  name: 'D3',
+                  name: "D3",
                 },
               ],
             },
@@ -41,10 +41,10 @@ const data = {
         },
       ],
     },
-    { name: 'Z' },
+    { name: "Z" },
     {
-      name: 'B',
-      children: [{ name: 'B1' }, { name: 'B2' }, { name: 'B3' }],
+      name: "B",
+      children: [{ name: "B1" }, { name: "B2" }, { name: "B3" }],
     },
   ],
 };
@@ -63,7 +63,6 @@ class App extends React.Component {
           </Typography>
 
           <Routing rawTree={data} width={1200} height={600} />
-
         </Paper>
       </Container>
     );

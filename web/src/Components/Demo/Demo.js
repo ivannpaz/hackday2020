@@ -1,44 +1,44 @@
-import React, { useMemo } from 'react';
-import { Group } from '@visx/group';
-import { Tree, hierarchy } from '@visx/hierarchy';
-import { LinkHorizontal } from '@visx/shape';
-import { LinearGradient } from '@visx/gradient';
+import React, { useMemo } from "react";
+import { Group } from "@visx/group";
+import { Tree, hierarchy } from "@visx/hierarchy";
+import { LinkHorizontal } from "@visx/shape";
+import { LinearGradient } from "@visx/gradient";
 
-const peach = '#fd9b93';
-const pink = '#fe6e9e';
-const blue = '#03c0dc';
-const green = '#26deb0';
-const plum = '#71248e';
-const lightpurple = '#374469';
-const white = '#ffffff';
-export const background = '#272b4d';
+const peach = "#fd9b93";
+const pink = "#fe6e9e";
+const blue = "#03c0dc";
+const green = "#26deb0";
+const plum = "#71248e";
+const lightpurple = "#374469";
+const white = "#ffffff";
+export const background = "#272b4d";
 
 const rawTree = {
-  name: 'T',
+  name: "T",
   children: [
     {
-      name: 'A',
+      name: "A",
       children: [
-        { name: 'A1' },
-        { name: 'A2' },
-        { name: 'A3' },
+        { name: "A1" },
+        { name: "A2" },
+        { name: "A3" },
         {
-          name: 'C',
+          name: "C",
           children: [
             {
-              name: 'C1',
+              name: "C1",
             },
             {
-              name: 'D',
+              name: "D",
               children: [
                 {
-                  name: 'D1',
+                  name: "D1",
                 },
                 {
-                  name: 'D2',
+                  name: "D2",
                 },
                 {
-                  name: 'D3',
+                  name: "D3",
                 },
               ],
             },
@@ -46,10 +46,10 @@ const rawTree = {
         },
       ],
     },
-    { name: 'Z' },
+    { name: "Z" },
     {
-      name: 'B',
-      children: [{ name: 'B1' }, { name: 'B2' }, { name: 'B3' }],
+      name: "B",
+      children: [{ name: "B1" }, { name: "B2" }, { name: "B3" }],
     },
   ],
 };
@@ -89,7 +89,7 @@ function Node({ node }) {
         fontFamily="Arial"
         textAnchor="middle"
         fill={green}
-        style={{ pointerEvents: 'none' }}
+        style={{ pointerEvents: "none" }}
       >
         {node.data.name}
       </text>
@@ -106,7 +106,7 @@ function RootNode({ node }) {
         fontSize={9}
         fontFamily="Arial"
         textAnchor="middle"
-        style={{ pointerEvents: 'none' }}
+        style={{ pointerEvents: "none" }}
         fill={plum}
       >
         {node.data.name}
@@ -140,7 +140,7 @@ function ParentNode({ node }) {
         fontSize={9}
         fontFamily="Arial"
         textAnchor="middle"
-        style={{ pointerEvents: 'none' }}
+        style={{ pointerEvents: "none" }}
         fill={white}
       >
         {node.data.name}
@@ -161,7 +161,7 @@ export default function Example({ width, height, margin = defaultMargin }) {
       <LinearGradient id="lg" from={peach} to={pink} />
       <rect width={width} height={height} rx={14} fill={background} />
       <Tree root={data} size={[yMax, xMax]}>
-        {tree => (
+        {(tree) => (
           <Group top={margin.top} left={margin.left}>
             {tree.links().map((link, i) => (
               <LinkHorizontal
