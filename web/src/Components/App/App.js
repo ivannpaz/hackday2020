@@ -9,10 +9,10 @@ import { Paper } from "@material-ui/core";
 import Routing from "../Routing/Routing";
 
 const data = {
-  name: "T",
+  name: "Root node",
   children: [
     {
-      name: "A",
+      name: "Step 1",
       children: [
         { name: "A1" },
         { name: "A2" },
@@ -52,10 +52,38 @@ const data = {
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.setState({"maria": "lives here"})
+    this.state = {
+      items: [],
+      isLoaded: false,
+    }
+  }
+
+  componentDidMount() {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(res => res.json())
+      .then(json => {
+        this.setState({
+          isLoaded: true,
+          items: json,
+        })
+      })
   }
 
   render() {
+    var { isLoaded, items} = this.state;
+
+    if (!isLoaded) {
+      return <div>Loading...</div>
+    }
+
+    const getJsonIndented = (obj) => JSON.stringify(items, null, 4).replace(/["{[,}\]]/g, "")
+
+    const JSONDisplayer = ({children}) => (
+        <div>
+            <pre>{getJsonIndented(children)}</pre>
+        </div>
+    )
+
     return (
       <Container maxWidth="xl" className="App">
         <Paper>
@@ -64,6 +92,8 @@ class App extends React.Component {
           </Typography>
 
           <Routing rawTree={data} width={1200} height={600} />
+
+          <JSONDisplayer>{items}</JSONDisplayer>
         </Paper>
       </Container>
     );
