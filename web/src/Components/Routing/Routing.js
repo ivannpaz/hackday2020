@@ -15,8 +15,8 @@ export const background = "#272b4d";
 
 /** Handles rendering Root, Parent, and other Nodes. */
 function Node({ node }) {
-  const width = 40;
-  const height = 20;
+  const width = 160;
+  const height = 30;
   const centerX = -width / 2;
   const centerY = -height / 2;
   const isRoot = node.depth === 0;
@@ -32,19 +32,19 @@ function Node({ node }) {
         width={width}
         y={centerY}
         x={centerX}
-        fill={background}
-        stroke={green}
-        strokeWidth={1}
+        fill={lightpurple}
+        stroke={plum}
+        strokeWidth={0}
         strokeDasharray="2,2"
         strokeOpacity={0.6}
         rx={10}
         onClick={() => {
-          alert(`clicked: ${JSON.stringify(node.data.name)}`);
+          console.log("Entering for", node.data.description)
         }}
       />
       <text
         dy=".33em"
-        fontSize={9}
+        fontSize={10}
         fontFamily="Arial"
         textAnchor="middle"
         fill={green}
@@ -59,12 +59,13 @@ function Node({ node }) {
 function RootNode({ node }) {
   return (
     <Group top={node.x} left={node.y}>
-      <circle r={12} fill="url('#lg')" />
+      <circle r={48} fill="url('#lg')" />
       <text
-        dy=".33em"
-        fontSize={9}
+        dy=".24em"
+        fontSize={12}
         fontFamily="Arial"
         textAnchor="middle"
+        fontWeight="bold"
         style={{ pointerEvents: "none" }}
         fill={plum}
       >
@@ -75,10 +76,19 @@ function RootNode({ node }) {
 }
 
 function ParentNode({ node }) {
-  const width = 40;
-  const height = 20;
+  const width = 140;
+  const height = 32;
   const centerX = -width / 2;
   const centerY = -height / 2;
+
+  const incr = 15
+  var pos = 0
+
+  var matchers = Object.keys(node.data.matchers).map(function(keyName, keyIndex) {
+    var val = <tspan class="em" x="0" y={pos}>{keyName + ": " + node.data.matchers[keyName]}</tspan>
+    pos += incr
+    return val
+  })
 
   return (
     <Group top={node.x} left={node.y}>
@@ -89,20 +99,26 @@ function ParentNode({ node }) {
         x={centerX}
         fill={background}
         stroke={blue}
-        strokeWidth={1}
+        strokeWidth={0}
         onClick={() => {
-          alert(`clicked: ${JSON.stringify(node.data.name)}`);
+          console.log("Entering for", node.data.description)
+        }}
+        onMouseEnter={() => {
+          //
+        }}
+        onMouseLeave={() => {
+          //
         }}
       />
       <text
         dy=".33em"
-        fontSize={9}
-        fontFamily="Arial"
+        fontSize={10}
+        fontFamily="Roboto"
         textAnchor="middle"
         style={{ pointerEvents: "none" }}
         fill={white}
       >
-        {node.data.name}
+        {matchers}
       </text>
     </Group>
   );

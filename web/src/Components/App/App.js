@@ -5,61 +5,21 @@ import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import { Paper } from "@material-ui/core";
 
-// import Routing from '../Routing/Routing'
 import Routing from "../Routing/Routing";
 
-const data = {
-  name: "Root node",
-  children: [
-    {
-      name: "Step 1",
-      children: [
-        { name: "A1" },
-        { name: "A2" },
-        { name: "A3" },
-        {
-          name: "C",
-          children: [
-            {
-              name: "C1",
-            },
-            {
-              name: "D",
-              children: [
-                {
-                  name: "D1",
-                },
-                {
-                  name: "D2",
-                },
-                {
-                  name: "D3",
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-    { name: "Z" },
-    {
-      name: "B",
-      children: [{ name: "B1" }, { name: "B2" }, { name: "B3" }],
-    },
-  ],
-};
+class App extends React.PureComponent {
 
-class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       items: [],
       isLoaded: false,
+      isError: false,
     }
   }
 
   componentDidMount() {
-    fetch('https://jsonplaceholder.typicode.com/users')
+    fetch('http://localhost:9000/api/alertmanager')
       .then(res => res.json())
       .then(json => {
         this.setState({
@@ -67,22 +27,21 @@ class App extends React.Component {
           items: json,
         })
       })
+      .catch(function() {
+        console.log("error");
+    })
   }
 
   render() {
-    var { isLoaded, items} = this.state;
+    var { isLoaded, isError, items} = this.state;
 
     if (!isLoaded) {
       return <div>Loading...</div>
     }
 
-    const getJsonIndented = (obj) => JSON.stringify(items, null, 4).replace(/["{[,}\]]/g, "")
-
-    const JSONDisplayer = ({children}) => (
-        <div>
-            <pre>{getJsonIndented(children)}</pre>
-        </div>
-    )
+    if (isError) {
+      return <div>Error fetching data...</div>
+    }
 
     return (
       <Container maxWidth="xl" className="App">
@@ -91,9 +50,7 @@ class App extends React.Component {
             Alert Manager Routings
           </Typography>
 
-          <Routing rawTree={data} width={1200} height={600} />
-
-          <JSONDisplayer>{items}</JSONDisplayer>
+          <Routing rawTree={items} width={1100} height={1200} />
         </Paper>
       </Container>
     );

@@ -8,6 +8,9 @@ github.com/klauspost/compress v1.10.7 h1:7rix8v8GpI3ZBb0nSozFRgbtXKv+hOe+qfEpZqy
 github.com/klauspost/compress v1.10.7/go.mod h1:aoV0uJVorq1K+umq18yTdKaF57EivdYsUV+/s2qKfXs=
 github.com/klauspost/compress v1.11.3 h1:dB4Bn0tN3wdCzQxnS8r06kV74qN/TAfaIS0bVE8h3jc=
 github.com/klauspost/compress v1.11.3/go.mod h1:aoV0uJVorq1K+umq18yTdKaF57EivdYsUV+/s2qKfXs=
+github.com/magento-mcom/go-common v0.0.0-20201102111149-8c57feb509d3 h1:GqrD+opwVc7NuUj/PWUdaC0Tz0ZDjzcrsLDBPo1pUjE=
+github.com/magento-mcom/go-common/walker v1.0.0 h1:W17H1gs0VKc6qWmCxVNH4v/ZHgiWmyo1IwjmVWbIrc8=
+github.com/magento-mcom/go-common/walker v1.0.0/go.mod h1:oBIQsnAmaklm7llFn/NQ3+KQSMQi8nnWiVTbz4lou4o=
 github.com/valyala/bytebufferpool v1.0.0 h1:GqA5TC/0021Y/b9FG4Oi9Mr3q7XYx6KllzawFIhcdPw=
 github.com/valyala/bytebufferpool v1.0.0/go.mod h1:6bBcMArwyJ5K/AmCkWv1jt77kVWyCJ6HpOuEn7z0Csc=
 github.com/valyala/fasthttp v1.18.0 h1:IV0DdMlatq9QO1Cr6wGJPVW1sV1Q8HvZXAIcjorylyM=
