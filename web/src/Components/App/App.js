@@ -50,7 +50,7 @@ class App extends React.PureComponent {
             Alert Manager Routings
           </Typography>
 
-          <Routing rawTree={items} width={1100} height={1200} />
+          <Routing rawTree={items} width={1100} height={1600} />
         </Paper>
       </Container>
     );

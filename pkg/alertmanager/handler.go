@@ -46,6 +46,7 @@ func recurseTree(routing d3.Node, route Route, isRoot bool) d3.Node {
 	routing.Name = route.Receiver
 
 	if len(route.Routes) > 0 {
+		// Wrap in matechers if not root node
 		if !isRoot {
 			wrap := d3.Node{}
 			wrap.Matchers = route.MatchRe
@@ -57,6 +58,7 @@ func recurseTree(routing d3.Node, route Route, isRoot bool) d3.Node {
 			routing.Children = append(routing.Children, recurseTree(d3.Node{}, rt, false))
 		}
 	} else if !isRoot {
+		// Wrap the original node win matchers, but only if not the root node
 		return d3.Node{
 			Children: []d3.Node{routing},
 			Matchers: route.MatchRe,

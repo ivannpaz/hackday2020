@@ -23,7 +23,7 @@ function Node({ node }) {
   const isParent = !!node.children;
 
   if (isRoot) return <RootNode node={node} />;
-  if (isParent) return <ParentNode node={node} />;
+  if (isParent) return <RoutingNode node={node} />;
 
   return (
     <Group top={node.x} left={node.y}>
@@ -75,7 +75,7 @@ function RootNode({ node }) {
   );
 }
 
-class ParentNode extends React.Component {
+class RoutingNode extends React.Component {
   constructor(props) {
     super(props);
     this.state = {}
