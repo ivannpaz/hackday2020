@@ -14,46 +14,54 @@ const white = "#ffffff";
 export const background = "#272b4d";
 
 /** Handles rendering Root, Parent, and other Nodes. */
-function Node({ node }) {
-  const width = 160;
-  const height = 30;
-  const centerX = -width / 2;
-  const centerY = -height / 2;
-  const isRoot = node.depth === 0;
-  const isParent = !!node.children;
+class Node extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {}
+  }
 
-  if (isRoot) return <RootNode node={node} />;
-  if (isParent) return <RoutingNode node={node} />;
+  render() {
+    const { node } = this.props;
+    const width = 160;
+    const height = 30;
+    const centerX = -width / 2;
+    const centerY = -height / 2;
+    const isRoot = node.depth === 0;
+    const isParent = !!node.children;
 
-  return (
-    <Group top={node.x} left={node.y}>
-      <rect
-        height={height}
-        width={width}
-        y={centerY}
-        x={centerX}
-        fill={lightpurple}
-        stroke={plum}
-        strokeWidth={0}
-        strokeDasharray="2,2"
-        strokeOpacity={0.6}
-        rx={10}
-        onClick={() => {
-          console.log("Entering for", node.data.description)
-        }}
-      />
-      <text
-        dy=".33em"
-        fontSize={10}
-        fontFamily="Arial"
-        textAnchor="middle"
-        fill={green}
-        style={{ pointerEvents: "none" }}
-      >
-        {node.data.name}
-      </text>
-    </Group>
-  );
+    if (isRoot) return <RootNode node={node} />;
+    if (isParent) return <RoutingNode node={node} />;
+
+    return (
+      <Group top={node.x} left={node.y}>
+        <rect
+          height={height}
+          width={width}
+          y={centerY}
+          x={centerX}
+          fill={lightpurple}
+          stroke={plum}
+          strokeWidth={0}
+          strokeDasharray="2,2"
+          strokeOpacity={0.6}
+          rx={10}
+          onClick={() => {
+            console.log("Entering for", node.data.description)
+          }}
+        />
+        <text
+          dy=".33em"
+          fontSize={10}
+          fontFamily="Arial"
+          textAnchor="middle"
+          fill={green}
+          style={{ pointerEvents: "none" }}
+        >
+          {node.data.name}
+        </text>
+      </Group>
+    );
+  }
 }
 
 function RootNode({ node }) {
