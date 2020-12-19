@@ -5,19 +5,32 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/ivannpaz/hackday2020/pkg/d3"
+	"github.com/ivannpaz/hackday2020/pkg/dataprovider"
 )
 
+type reader struct {
+	dpr dataprovider.Provider
+}
+
 // NewHandler ...
-func NewHandler(data []byte) func(c *fiber.Ctx) error {
+func NewHandler(dpr dataprovider.Provider) func(c *fiber.Ctx) error {
+	r := reader{dpr: dpr}
+
 	return func(c *fiber.Ctx) error {
-		return c.JSON(generate(data))
+		return c.JSON(r.generate("config_pacho.json"))
 	}
 }
 
-func generate(data []byte) d3.Node {
-	jdata := Config{}
+func (r *reader) generate(filename string) d3.Node {
+	data, err := r.dpr.Read(filename)
+	if err != nil {
+		return d3.Node{
+			Name: "Failed to load tree",
+		}
+	}
 
-	err := json.Unmarshal(data, &jdata)
+	jdata := Config{}
+	err = json.Unmarshal(data, &jdata)
 	if err != nil {
 		return d3.Node{
 			Name: "Failed to load tree",

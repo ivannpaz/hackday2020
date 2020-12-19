@@ -75,53 +75,63 @@ function RootNode({ node }) {
   );
 }
 
-function ParentNode({ node }) {
-  const width = 140;
-  const height = 32;
-  const centerX = -width / 2;
-  const centerY = -height / 2;
+class ParentNode extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {}
+  }
 
-  const incr = 15
-  var pos = 0
+  render() {
+    const { node } = this.props;
+    const width = 140;
+    const height = 32;
+    const centerX = -width / 2;
+    const centerY = -height / 2;
 
-  var matchers = Object.keys(node.data.matchers).map(function(keyName, keyIndex) {
-    var val = <tspan class="em" x="0" y={pos}>{keyName + ": " + node.data.matchers[keyName]}</tspan>
-    pos += incr
-    return val
-  })
+    const incr = 15
+    var pos = 0
 
-  return (
-    <Group top={node.x} left={node.y}>
-      <rect
-        height={height}
-        width={width}
-        y={centerY}
-        x={centerX}
-        fill={background}
-        stroke={blue}
-        strokeWidth={0}
-        onClick={() => {
-          console.log("Entering for", node.data.description)
-        }}
-        onMouseEnter={() => {
-          //
-        }}
-        onMouseLeave={() => {
-          //
-        }}
-      />
-      <text
-        dy=".33em"
-        fontSize={10}
-        fontFamily="Roboto"
-        textAnchor="middle"
-        style={{ pointerEvents: "none" }}
-        fill={white}
-      >
-        {matchers}
-      </text>
-    </Group>
-  );
+    var matchers = Object.keys(node.data.matchers).map(function(keyName, keyIndex) {
+      var val = <tspan key={keyIndex} x="0" y={pos}>{keyName + ": " + node.data.matchers[keyName]}</tspan>
+      pos += incr
+      return val
+    })
+
+    return (
+      <Group top={node.x} left={node.y}>
+        <rect
+          height={height}
+          width={width}
+          y={centerY}
+          x={centerX}
+          fill={background}
+          stroke={blue}
+          strokeWidth={0}
+          onClick={() => {
+            console.log("Entering for", node.data.description)
+          }}
+          onMouseEnter={() => {
+            //
+          }}
+          onMouseLeave={() => {
+            //
+          }}
+        />
+
+        <text
+          dy=".33em"
+          fontSize={10}
+          fontFamily="Roboto"
+          textAnchor="middle"
+          style={{ pointerEvents: "none" }}
+          fill={white}
+        >
+          {matchers}
+        </text>
+
+      </Group>
+    );
+  }
 }
 
 const defaultMargin = { top: 10, left: 80, right: 80, bottom: 10 };
