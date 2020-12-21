@@ -13,6 +13,11 @@ type reader struct {
 	dpr dataprovider.Provider
 }
 
+var mapped = map[string]string{
+	"prd": "pacho",
+	"dev": "nacho",
+}
+
 // NewRoutingHandler ...
 func NewRoutingHandler(dpr dataprovider.Provider) func(c *fiber.Ctx) error {
 	r := reader{dpr: dpr}
@@ -23,13 +28,13 @@ func NewRoutingHandler(dpr dataprovider.Provider) func(c *fiber.Ctx) error {
 }
 
 func (r *reader) generate(env string) d3.Node {
-	if env != "nacho" && env != "pacho" {
+	if env != "prd" && env != "dev" {
 		return d3.Node{
 			Name: "Failed to load tree",
 		}
 	}
 
-	data, err := r.dpr.Read(fmt.Sprintf("config_%s.json", env))
+	data, err := r.dpr.Read(fmt.Sprintf("config_%s.json", mapped[env]))
 	if err != nil {
 		return d3.Node{
 			Name: "Failed to load tree",
@@ -65,7 +70,7 @@ func recurseTree(routing d3.Node, route Route, isRoot bool) d3.Node {
 			routing.Children = append(routing.Children, recurseTree(d3.Node{}, rt, false))
 		}
 	} else if !isRoot {
-		// Wrap the original node win matchers, but only if not the root node
+		// Wrap the original node with matchers, but only if not the root node
 		return d3.Node{
 			Children: []d3.Node{routing},
 			Matchers: route.MatchRe,

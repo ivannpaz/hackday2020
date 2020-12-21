@@ -3,12 +3,12 @@ import "./App.css";
 import React from "react";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
-import { Paper } from "@material-ui/core";
+import { Grid, Paper } from "@material-ui/core";
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import 'fontsource-roboto';
 
 import Routing from "../Routing/Routing";
 import Menu from "../Menu/Menu";
-import SVG from "../SVG/SVG";
 
 class App extends React.PureComponent {
 
@@ -27,7 +27,7 @@ class App extends React.PureComponent {
   }
 
   fecthData() {
-    fetch(this.state.basePath + 'api/alertmanager/routes/nacho')
+    fetch(this.state.basePath + 'api/alertmanager/routes/prd')
       .then(res => res.json())
       .then(json => {
         this.setState({
@@ -52,21 +52,34 @@ class App extends React.PureComponent {
     }
 
     return (
-      <Container maxWidth="xl" className="App">
+      <Container maxWidth="xl" xs={12} className="App">
         <Paper>
-          <Typography variant="h4" component="h1" gutterBottom>
-            Alert Manager Routings
-          </Typography>
-
-          <Menu />
-
-          <Router>
-            <Switch>
-              <Route path="/">
-                <Routing rawTree={items} width={1100} height={1600} />
-              </Route>
-            </Switch>
-          </Router>
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <Typography variant="h4" component="h1" gutterBottom>
+                Alert Manager Routings
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Menu />
+            </Grid>
+            <Grid item xs={8}>
+              <Paper>
+                <Router>
+                  <Switch>
+                    <Route path="/">
+                      <Routing rawTree={items} width={1100} height={1600} />
+                    </Route>
+                  </Switch>
+                </Router>
+              </Paper>
+            </Grid>
+            <Grid item xs={4}>
+              <Paper>
+                SideBar
+              </Paper>
+            </Grid>
+          </Grid>
         </Paper>
       </Container>
     );
