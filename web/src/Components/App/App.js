@@ -15,11 +15,12 @@ class App extends React.PureComponent {
       items: [],
       isLoaded: false,
       isError: false,
+      basePath: props.basePath,
     }
   }
 
   componentDidMount() {
-    fetch('http://localhost:9000/api/alertmanager')
+    fetch(this.state.basePath + 'api/alertmanager/routes/nacho')
       .then(res => res.json())
       .then(json => {
         this.setState({

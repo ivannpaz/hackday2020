@@ -8,10 +8,6 @@ import (
 )
 
 func main() {
-	// configData, err := ioutil.ReadFile("./data/config_nacho.json")
-	// if err != nil {
-	// 	panic(err)
-	// }
 	dataProvider := dataprovider.New("./data/")
 
 	app := fiber.New(fiber.Config{
@@ -24,7 +20,7 @@ func main() {
 	app.Use(cors.New())
 
 	app.Static("/", "./web/build")
-	app.Get("/api/alertmanager", alertmanager.NewHandler(dataProvider))
+	app.Get("/api/alertmanager/routes/:env", alertmanager.NewHandler(dataProvider))
 
 	app.Listen(":9000")
 }

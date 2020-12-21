@@ -8,11 +8,16 @@ import App from "./Components/App/App";
 import theme from "./theme";
 import * as serviceWorker from "./serviceWorker";
 
+var basePath = ""
+if (process.env.NODE_ENV === "development") {
+  basePath = "http://localhost:9000/"
+}
+
 ReactDOM.render(
   <ThemeProvider theme={theme}>
     {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
     <CssBaseline />
-    <App />
+    <App basePath={basePath} />
   </ThemeProvider>,
   document.getElementById("root")
 );

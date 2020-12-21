@@ -2,6 +2,7 @@ package alertmanager
 
 import (
 	"encoding/json"
+	"fmt"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/ivannpaz/hackday2020/pkg/d3"
@@ -17,12 +18,18 @@ func NewHandler(dpr dataprovider.Provider) func(c *fiber.Ctx) error {
 	r := reader{dpr: dpr}
 
 	return func(c *fiber.Ctx) error {
-		return c.JSON(r.generate("config_pacho.json"))
+		return c.JSON(r.generate(c.Params("env")))
 	}
 }
 
-func (r *reader) generate(filename string) d3.Node {
-	data, err := r.dpr.Read(filename)
+func (r *reader) generate(env string) d3.Node {
+	if env != "nacho" && env != "pacho" {
+		return d3.Node{
+			Name: "Failed to load tree",
+		}
+	}
+
+	data, err := r.dpr.Read(fmt.Sprintf("config_%s.json", env))
 	if err != nil {
 		return d3.Node{
 			Name: "Failed to load tree",

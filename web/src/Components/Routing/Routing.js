@@ -14,7 +14,7 @@ const white = "#ffffff";
 export const background = "#272b4d";
 
 /** Handles rendering Root, Parent, and other Nodes. */
-class Node extends React.Component {
+class TreeNode extends React.Component {
   constructor(props) {
     super(props);
     this.state = {}
@@ -167,7 +167,7 @@ function Routing({ rawTree, width, height, margin = defaultMargin }) {
               />
             ))}
             {tree.descendants().map((node, i) => (
-              <Node key={`node-${i}`} node={node} />
+              <TreeNode key={`node-${i}`} node={node} />
             ))}
           </Group>
         )}
