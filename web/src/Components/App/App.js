@@ -8,6 +8,7 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 import Routing from "../Routing/Routing";
 import Menu from "../Menu/Menu";
+import SVG from "../SVG/SVG";
 
 class App extends React.PureComponent {
 
@@ -34,8 +35,8 @@ class App extends React.PureComponent {
           items: json,
         })
       })
-      .catch(function() {
-        console.log("error");
+      .catch(function(error) {
+        console.log("error", error);
     })
   }
 
@@ -51,21 +52,23 @@ class App extends React.PureComponent {
     }
 
     return (
-      <Router>
-        <Container maxWidth="xl" className="App">
-          <Paper>
-            <Typography variant="h4" component="h1" gutterBottom>
-              Alert Manager Routings
-            </Typography>
-            <Menu />
+      <Container maxWidth="xl" className="App">
+        <Paper>
+          <Typography variant="h4" component="h1" gutterBottom>
+            Alert Manager Routings
+          </Typography>
+
+          <Menu />
+
+          <Router>
             <Switch>
               <Route path="/">
                 <Routing rawTree={items} width={1100} height={1600} />
               </Route>
             </Switch>
-          </Paper>
-        </Container>
-      </Router>
+          </Router>
+        </Paper>
+      </Container>
     );
   }
 }

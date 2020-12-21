@@ -13,8 +13,8 @@ type reader struct {
 	dpr dataprovider.Provider
 }
 
-// NewHandler ...
-func NewHandler(dpr dataprovider.Provider) func(c *fiber.Ctx) error {
+// NewRoutingHandler ...
+func NewRoutingHandler(dpr dataprovider.Provider) func(c *fiber.Ctx) error {
 	r := reader{dpr: dpr}
 
 	return func(c *fiber.Ctx) error {

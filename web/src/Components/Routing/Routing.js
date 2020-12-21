@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { Group } from "@visx/group";
 import { Tree, hierarchy } from "@visx/hierarchy";
 import { LinkHorizontal } from "@visx/shape";
@@ -144,36 +144,45 @@ class RoutingNode extends React.Component {
 
 const defaultMargin = { top: 10, left: 80, right: 80, bottom: 10 };
 
-function Routing({ rawTree, width, height, margin = defaultMargin }) {
-    // eslint-disable-next-line
-  const data = useMemo(() => hierarchy(rawTree), []);
-  const yMax = height - margin.top - margin.bottom;
-  const xMax = width - margin.left - margin.right;
+class Routing extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {}
+  }
 
-  return width < 10 ? null : (
-    <svg width={width} height={height}>
-      <LinearGradient id="lg" from={peach} to={pink} />
-      <rect width={width} height={height} rx={14} fill={background} />
-      <Tree root={data} size={[yMax, xMax]}>
-        {(tree) => (
-          <Group top={margin.top} left={margin.left}>
-            {tree.links().map((link, i) => (
-              <LinkHorizontal
-                key={`link-${i}`}
-                data={link}
-                stroke={lightpurple}
-                strokeWidth="1"
-                fill="none"
-              />
-            ))}
-            {tree.descendants().map((node, i) => (
-              <TreeNode key={`node-${i}`} node={node} />
-            ))}
-          </Group>
-        )}
-      </Tree>
-    </svg>
-  );
+  render() {
+    const { rawTree, width, height, margin = defaultMargin } = this.props;
+    // eslint-disable-next-line
+    //const data = useMemo(() => hierarchy(rawTree), []);
+    const data = hierarchy(rawTree);
+    const yMax = height - margin.top - margin.bottom;
+    const xMax = width - margin.left - margin.right;
+
+    return width < 10 ? null : (
+      <svg width={width} height={height}>
+        <LinearGradient id="lg" from={peach} to={pink} />
+        <rect width={width} height={height} rx={14} fill={background} />
+        <Tree root={data} size={[yMax, xMax]}>
+          {(tree) => (
+            <Group top={margin.top} left={margin.left}>
+              {tree.links().map((link, i) => (
+                <LinkHorizontal
+                  key={`link-${i}`}
+                  data={link}
+                  stroke={lightpurple}
+                  strokeWidth="1"
+                  fill="none"
+                />
+              ))}
+              {tree.descendants().map((node, i) => (
+                <TreeNode key={`node-${i}`} node={node} />
+              ))}
+            </Group>
+          )}
+        </Tree>
+      </svg>
+    );
+  }
 }
 
 export default Routing;
