@@ -4,6 +4,7 @@ import React from "react";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import { Grid, Paper } from "@material-ui/core";
+import Divider from "@material-ui/core/Divider";
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import 'fontsource-roboto';
 
@@ -64,7 +65,6 @@ class App extends React.PureComponent {
               <Menu />
             </Grid>
             <Grid item xs={8}>
-              <Paper>
                 <Router>
                   <Switch>
                     <Route path="/">
@@ -72,12 +72,9 @@ class App extends React.PureComponent {
                     </Route>
                   </Switch>
                 </Router>
-              </Paper>
             </Grid>
             <Grid item xs={4}>
-              <Paper>
                 SideBar
-              </Paper>
             </Grid>
           </Grid>
         </Paper>
